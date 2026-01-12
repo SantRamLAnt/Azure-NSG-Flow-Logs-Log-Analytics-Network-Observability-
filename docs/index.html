@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Azure NSG Flow Logs – Hub & Spoke Live Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Mermaid -->
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "dark",
+      securityLevel: "loose"
+    });
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #0b0f14;
+      color: #e6edf3;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: #161b22;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 0 0 1px #30363d;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    p {
+      color: #9da7b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Azure NSG Flow Logs – Hub & Spoke (Live Architecture)</h1>
+    <p>
+      Interactive architecture demo showing NSG Flow Logs v2 in a hub-and-spoke Azure network.
+      Click any resource to jump to the relevant Azure Portal blade.
+    </p>
+
+<pre class="mermaid">
+flowchart LR
+  %% ===== SUBSCRIPTION =====
+  subgraph SUB["Azure Subscription (Non-Prod)"]
+
+    %% ===== HUB =====
+    subgraph HUB["Hub VNet (10.0.0.0/16)"]
+      FWPolicy["Azure Firewall Policy<br/>(Policy-First Design)"]
+    end
+
+    %% ===== SPOKE =====
+    subgraph SPOKE["Spoke VNet (10.1.0.0/16)"]
+      VM["Workload VM<br/>vm-test-spoke-01"]
+      NIC["NIC"]
+      NSG["Network Security Group"]
+      RT["UDR<br/>0.0.0.0/0 → Firewall"]
+
+      VM --> NIC --> NSG
+      NSG --> RT
+    end
+
+    %% ===== PEERING =====
+    HUB <-->|VNet Peering| SPOKE
+
+    %% ===== MONITORING =====
+    subgraph MON["Monitoring"]
+      FLOW["NSG Flow Logs v2"]
+      SA["Storage Account"]
+      LAW["Log Analytics Workspace"]
+    end
+
+    NSG --> FLOW
+    FLOW --> SA
+    FLOW --> LAW
+  end
+
+  %% ===== LINKS =====
+  click VM "https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FvirtualMachines" "Virtual Machines"
+  click NSG "https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FnetworkSecurityGroups" "Network Security Groups"
+  click LAW "https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.OperationalInsights%2Fworkspaces" "Log Analytics Workspaces"
+  click SA "https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FstorageAccounts" "Storage Accounts"
+</pre>
+
+  </div>
+</body>
+</html>
