@@ -2,7 +2,16 @@
 
 ## Overview
 
-https://santramlant.github.io/Azure-NSG-Flow-Logs-Log-Analytics-Network-Observability-/
+## 🔎 Live Architecture Demo
+
+👉 **Interactive NSG Flow Logs – Hub & Spoke Architecture**  
+https://santramant.github.io/Azure-NSG-Flow-Logs-Log-Analytics-Network-Observability/
+
+This live diagram demonstrates:
+- Hub-and-spoke Azure networking
+- NSG Flow Logs v2 data path
+- Log Analytics & Storage integration
+- UDR-based forced tunneling to firewall
 
 This project demonstrates how to enable and validate **Azure NSG Flow Logs (v2)** for a non-production workload, store logs in a **Storage Account**, and run **traffic analysis using Log Analytics (KQL)**. The goal is to prove end-to-end network observability: configuration → traffic generation → log ingestion → query evidence.
 
