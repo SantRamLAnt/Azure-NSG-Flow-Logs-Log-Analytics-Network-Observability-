@@ -2,6 +2,8 @@
 
 ## Overview
 
+https://santramlant.github.io/Azure-NSG-Flow-Logs-Log-Analytics-Network-Observability-/
+
 This project demonstrates how to enable and validate **Azure NSG Flow Logs (v2)** for a non-production workload, store logs in a **Storage Account**, and run **traffic analysis using Log Analytics (KQL)**. The goal is to prove end-to-end network observability: configuration → traffic generation → log ingestion → query evidence.
 
 **Use case:** Security operations and cloud platform teams need visibility into allowed/denied flows for troubleshooting, auditing, and governance.
