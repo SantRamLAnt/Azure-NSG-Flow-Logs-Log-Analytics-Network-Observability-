@@ -5,7 +5,7 @@
 ## 🔎 Live Architecture Demo
 
 👉 **Interactive NSG Flow Logs – Hub & Spoke Architecture**  
-https://santramant.github.io/Azure-NSG-Flow-Logs-Log-Analytics-Network-Observability/
+https://santramlant.github.io/Azure-NSG-Flow-Logs-Log-Analytics-Network-Observability-/
 
 This live diagram demonstrates:
 - Hub-and-spoke Azure networking
